@@ -5,7 +5,7 @@ export default class Main extends Component {
     render() {
         return(
             <div>
-                <h1>Hello</h1>
+                <h1>I've changed!</h1>
                 <p><Link to={"/"}>Home</Link></p>
                 <p><Link to={"/news"}>Something Else</Link></p>
             </div>

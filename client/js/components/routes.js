@@ -1,16 +1,15 @@
 import React, {Component} from "React";
-import ReactDOM from "react-dom";
-import {Router} from "react-router";
-import {BrowserHistory, Route} from "react-router-dom";
-import createBrowserHistory from "history/createBrowserHistory";
+import {BrowserRouter as Router, Route} from "react-router-dom";
 
 import Main from "./main";
-
-const history = createBrowserHistory();
+import Test from "./test";
 
 const routes = (
-    <Router history={history}>
-        <Route exact path="/" component={Main} />
+    <Router>
+        <div>
+            <Route exact path="/" component={Main} />
+            <Route path="/news" component={Test} />
+        </div>
     </Router>
 );
 
