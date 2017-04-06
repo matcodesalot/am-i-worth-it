@@ -2,6 +2,7 @@ import 'babel-polyfill';
 import express from 'express';
 import mongoose from 'mongoose';
 import bodyParser from 'body-parser';
+import usersRoutes from './endpoints/users-routes';
 
 mongoose.Promise = global.Promise;
 
@@ -15,9 +16,11 @@ exports.app = app;
 
 app.use(express.static(process.env.CLIENT_PATH));
 
+app.use("/users", usersRoutes);
+
 function runServer() {
     return new Promise((resolve, reject) => {
-        let databaseUri = process.env.DATABASE_URI || global.databaseUri || "mongodb://localhost/feels";
+        let databaseUri = process.env.DATABASE_URI || global.databaseUri || "mongodb://localhost/worth";
         mongoose
         .connect(databaseUri)
         .then(function() {
