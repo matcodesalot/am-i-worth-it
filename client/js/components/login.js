@@ -1,7 +1,21 @@
 import React, {Component} from "react";
-import {BrowserRouter as Router, Route, Link} from "react-router-dom";
+import {BrowserRouter as Router, Route, Link, withRouter} from "react-router-dom";
+import * as actions from '../redux/actions';
+import {connect} from 'react-redux';
 
-export default class Login extends Component {
+class Login extends Component {
+    onLoginPress(e) {
+        e.preventDefault();
+        const user = e.target.querySelector("[name=username]").value;
+        const pass = e.target.querySelector("[name=password]").value;
+        this.props.dispatch(actions.logInAsync({
+            username: user,
+            password: pass,
+        }));
+        e.target.reset();
+        //this.props.router.push("/");
+    }
+
     render() {
         return(
             <div>
@@ -9,12 +23,14 @@ export default class Login extends Component {
                 <p>Want to run away?<Link to={"/"}> Go Home</Link></p>
                 <p><Link to={"/register"}>I don't have an account</Link></p>
 
-                <form className="form-signin" action="/" method="post">
+                <form className="form-signin" action="/" method="post" onSubmit={this.onLoginPress.bind(this)}>
                     <input className="form-control" type="text" name="username" placeholder="Username" required />
                     <input className="form-control" type="password" name="password" placeholder="Password" required />
-                    <button type="submit" className="btn btn-primary btn-block btn-large">Let me in.</button>
+                    <input className="btn btn-primary btn-block btn-large" type="submit" value="Let me in" />
                 </form>
             </div>
         );
     }
 };
+
+export default withRouter(connect()(Login));
